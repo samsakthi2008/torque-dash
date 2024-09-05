@@ -1,9 +1,6 @@
-// Add module dependencies
 const express = require('express');
-const app = express();
 const path = require('path');
 const cors = require('cors');
-// const logger = require('morgan');
 const { sequelize } = require('./models');
 const config = require('./config/config');
 const exphbs = require('express-handlebars');
@@ -11,7 +8,9 @@ const flash = require('connect-flash');
 const session = require('cookie-session');
 const passport = require('passport');
 const User = require('./models').User;
-require('./config/passport')(passport); 
+require('./config/passport')(passport);
+
+const app = express();
 
 // Configure middleware
 app.use(cors());
@@ -33,7 +32,12 @@ app.use((req, res, next) => {
 });
 
 // Set templating engine
-app.engine('hbs', exphbs({defaultLayout: 'main', extname: 'hbs'}));
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: 'hbs'
+});
+
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/views'));
 
@@ -61,5 +65,3 @@ sequelize.sync(
     }).catch((err) => {
         console.log('Error connecting to the database:', err.message);
 });
-
-
