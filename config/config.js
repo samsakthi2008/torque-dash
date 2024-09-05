@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Define the path to the certificate file
-const certPath = path.join(__dirname,  'certs', 'ca.pem');
+const certPath = path.join(__dirname,  'ca.pem');
 
 // Read the certificate file
 const cert = fs.readFileSync(certPath).toString();
