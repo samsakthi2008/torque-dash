@@ -3,7 +3,7 @@ let config = {
     db: {
         uri: process.env.DATABASE_URL || 'postgres://torque-dash1-main-db-0e583f2559aa3181f:JdCC12SjudeNAhfvPUA8PfJqewqQ2Y@user-prod-us-east-2-1.cluster-cfi5vnucvv3w.us-east-2.rds.amazonaws.com:5432/torque-dash1-main-db-0e583f2559aa3181f',
         options: {
-            logging: false
+            logging: true
         }
     },
     session: {
