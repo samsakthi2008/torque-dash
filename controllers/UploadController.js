@@ -8,6 +8,7 @@ const request = require('request');
 class UploadController {  
     static async processUpload(req, res) {
         try {
+            console.log(req);
             let { eml, session, time } = req.query;
             let lon = req.query.kff1005;
             let lat = req.query.kff1006;
