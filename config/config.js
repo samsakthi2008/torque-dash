@@ -9,12 +9,13 @@ const cert = fs.readFileSync(certPath).toString();
 let config = {
     port: process.env.PORT || 3000,
     db: {
-        uri: process.env.DATABASE_URL || 'postgres://avnadmin:AVNS_a2Y3nNNdnwdtWDvLRnY@pg-6124afa-torque-dash.e.aivencloud.com:19018/defaultdb?sslmode=require',
+        uri: process.env.DATABASE_URL || 'postgres://avnadmin:AVNS_5iEf47jxHCIK4gRpg_Z@pg-172bb19d-torque-dash.e.aivencloud.com:19018/defaultdb?sslmode=require',
         options: {
             logging: true
         },
         ssl: {
-            rejectUnauthorized: true,  // Set to false if you do not want to verify the server certificate
+            rejectUnauthorized: false,
+            require: true,  // Set to false if you do not want to verify the server certificate
             cert: cert
         }
     },
