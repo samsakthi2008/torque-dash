@@ -5,7 +5,7 @@ const { sequelize } = require('./models');
 const config = require('./config/config');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
-const session = require('cookie-session');
+const session = require('express-session'); // Change here
 const passport = require('passport');
 const User = require('./models').User;
 require('./config/passport')(passport);
@@ -17,10 +17,14 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(logger('combined'));
+
 app.use(session({
-    keys: config.session.keys,
-    maxAge: 24 * 60 * 60 * 1000
+    secret: '527ebeab1c18e554b0780f21f156b7ceb60a4d554be2054de94ac2d72f7d99c9b2750d4b031ca87ead922d8e2ef24ed973cd1a0c4464c353186a5314f3e262fd', // Add a secret for signing the session ID cookie
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 } // 24 hours
 }));
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,16 +48,15 @@ app.set('views', path.join(__dirname, '/views'));
 // Define routes
 app.use('/', require('./routes/web.js'));
 app.use('/api', require('./routes/api.js'));
-// Since this is the last middleware used, assume 404, as nothing else responded.
 app.use('*', require('./routes/404.js'));
 
 // Connect to database and sync models
 sequelize.sync(
     // {force:true}
-    )
+)
     .then(() => {
-        console.log('Connection to database successfully established');  
-        
+        console.log('Connection to database successfully established');
+
         // User.create({
         //     email: 'test@contoso.com',
         //     password : 'heslo'
@@ -64,4 +67,4 @@ sequelize.sync(
 
     }).catch((err) => {
         console.log('Error connecting to the database:', err.message);
-});
+    });
