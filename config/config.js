@@ -1,7 +1,7 @@
 let config = {
     port: process.env.PORT || 3000,
     db: {
-        uri: process.env.DATABASE_URL || 'postgres://postgres:fSI0jmXBWZCYDAol5XEY@torque-dash.chu3jv8rnovy.ap-south-1.rds.amazonaws.com:5432/torque-dash',
+        uri: process.env.DATABASE_URL || 'postgres://avnadmin:AVNS_a2Y3nNNdnwdtWDvLRnY@pg-6124afa-torque-dash.e.aivencloud.com:19018/defaultdb?sslmode=require',
         options: {
             logging: true
         }
