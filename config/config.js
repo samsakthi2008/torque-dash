@@ -9,7 +9,7 @@ const cert = fs.readFileSync(certPath).toString();
 let config = {
     port: process.env.PORT || 3000,
     db: {
-        uri: process.env.DATABASE_URL || 'postgres://avnadmin:AVNS_5iEf47jxHCIK4gRpg_Z@pg-172bb19d-torque-dash.e.aivencloud.com:19018/defaultdb?sslmode=require',
+        uri: process.env.DATABASE_URL,
         options: {
             logging: true
         },
